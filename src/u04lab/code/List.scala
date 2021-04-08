@@ -1,6 +1,7 @@
 package u04lab.code
 
 import scala.annotation.tailrec
+import u04lab.code.Streams._
 
 object Lists extends App {
 
@@ -32,13 +33,6 @@ object Lists extends App {
     def map[A,B](l: List[A])(f: A => B): List[B] = l match {
       case Cons(h,t) => Cons(f(h), map(t)(f))
       case Nil() => Nil()
-    }
-
-    // add cointains for exercise 2
-    def contains[A](l: List[A])(f: A => Boolean): Boolean = l match {
-      case Cons(h,t) if f(h) => true
-      case Cons(_,t) => contains(t)(f)
-      case Nil() => false
     }
 
     def filter[A](l: List[A])(f: A => Boolean): List[A] = l match {
@@ -76,7 +70,21 @@ object Lists extends App {
 
     def appendByFold[A](l1: List[A], l2: List[A]): List[A] = ???
 
-    def length(l: List[_]): Int = ???
+    // implement contains for exercise 2
+    def contains[A](l: List[A])(f: A => Boolean): Boolean = l match {
+      case Cons(h,t) if f(h) => true
+      case Cons(_,t) => contains(t)(f)
+      case Nil() => false
+    }
+
+    // implement length for exercise 3
+    def length[A](l: List[A]): Int = foldLeft(l)(0)((acc,_) => acc +1)
+
+    // implement toStream for exercise 3
+    def toStream[A](l: List[A]): Stream[A] = l match {
+      case Cons(h,t) => Stream.cons(h, toStream(t))
+      case _ => Stream.empty()
+    }
   }
 
   // Note "List." qualification
