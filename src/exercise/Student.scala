@@ -34,3 +34,10 @@ object Student {
     override def hasTeacher(t: Teacher):Boolean = List.contains(courses(_.teacher))( teacher => teacher.name==t.name && teacher.lastname==t.lastname )
   }
 }
+
+object sameTeacher {
+  def unapply[A](l: List[Course]): Option[Any] = l match {
+    case List.Cons(h,t) if List.foldLeft(t)(true)((acc,l) => { acc && h.teacher == l.teacher } ) => Some(h.teacher) // teacher == it works because Teacher is case class
+    case _ => None
+  }
+}

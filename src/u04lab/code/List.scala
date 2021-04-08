@@ -15,6 +15,29 @@ object Lists extends App {
 
     def nil[A]: List[A] = Nil() // smart constructor
 
+    // Factory List - optional exercise
+    def apply[A](args: A*): List[A] = {
+      var list:List[A] = List.Nil[A]()
+      args foreach ( i => list = List.append(list, List.Cons[A](i, List.Nil[A]())) )
+      list
+    }
+
+    // implement contains for exercise 2
+    def contains[A](l: List[A])(f: A => Boolean): Boolean = l match {
+      case Cons(h,t) if f(h) => true
+      case Cons(_,t) => contains(t)(f)
+      case Nil() => false
+    }
+
+    // implement length for exercise 3
+    def length[A](l: List[A]): Int = foldLeft(l)(0)((acc,_) => acc +1)
+
+    // implement toStream for exercise 3
+    def toStream[A](l: List[A]): Stream[A] = l match {
+      case Cons(h,t) => Stream.cons(h, toStream(t))
+      case _ => Stream.empty()
+    }
+
     def sum(l: List[Int]): Int = l match {
       case Cons(h, t) => h + sum(t)
       case _ => 0
@@ -69,22 +92,6 @@ object Lists extends App {
     def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] = ???
 
     def appendByFold[A](l1: List[A], l2: List[A]): List[A] = ???
-
-    // implement contains for exercise 2
-    def contains[A](l: List[A])(f: A => Boolean): Boolean = l match {
-      case Cons(h,t) if f(h) => true
-      case Cons(_,t) => contains(t)(f)
-      case Nil() => false
-    }
-
-    // implement length for exercise 3
-    def length[A](l: List[A]): Int = foldLeft(l)(0)((acc,_) => acc +1)
-
-    // implement toStream for exercise 3
-    def toStream[A](l: List[A]): Stream[A] = l match {
-      case Cons(h,t) => Stream.cons(h, toStream(t))
-      case _ => Stream.empty()
-    }
   }
 
   // Note "List." qualification

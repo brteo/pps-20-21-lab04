@@ -11,7 +11,7 @@ class PowerIteratorsTest {
   val factory = new PowerIteratorsFactoryImpl()
 
   @Test
-  def testIncremental() {
+  def testIncremental(): Unit ={
     val pi = factory.incremental(5, _ + 2); // pi produce 5,7,9,11,13,...
     assertEquals(Option.of(5), pi.next());
     assertEquals(Option.of(7), pi.next());
@@ -24,7 +24,7 @@ class PowerIteratorsTest {
     assertEquals(Option.of(33), pi.next()); // sono arrivato a 33
   }
 
-  @Test def testRandom() { // semi-automatico, si controlleranno anche le stampe a video
+  @Test def testRandom(): Unit ={ // semi-automatico, si controlleranno anche le stampe a video
     val pi = factory.randomBooleans(4) // pi produce 4 booleani random
     val b1 = pi.next()
     val b2 = pi.next()
@@ -35,7 +35,7 @@ class PowerIteratorsTest {
     assertEquals(4, List.length(pi.allSoFar())) // ho prodotto proprio b1,b2,b3,b4
   }
 
-  @Test def testFromList() = {
+  @Test def testFromList(): Unit ={
     val pi = factory.fromList(List.Cons("a", List.Cons("b", List.Cons("c", List.Nil())))) // pi produce a,b,c
     assertEquals(pi.next(), Option.of("a"))
     assertEquals(pi.next(), Option.of("b"))
@@ -45,7 +45,7 @@ class PowerIteratorsTest {
     assertTrue(Option.isEmpty(pi.next())) // non c'è più niente da produrre
   }
 
-  @Test def optionalTestReversedOnList() {
+  @Test def optionalTestReversedOnList(): Unit ={
     val pi = factory.fromList(List.Cons("a", List.Cons("b", List.Cons("c",List.Nil()))));
     assertEquals(pi.next(), Option.of("a"))
     assertEquals(pi.next(), Option.of("b"))
@@ -59,7 +59,7 @@ class PowerIteratorsTest {
     assertTrue(Option.isEmpty(pi2.next()))
   }
 
-  @Test def optionalTestReversedOnIncremental() {
+  @Test def optionalTestReversedOnIncremental(): Unit ={
     val pi = factory.incremental(0,_+1); // 0,1,2,3,...
     assertEquals(Option.of(0), pi.next());
     assertEquals(Option.of(1), pi.next());
