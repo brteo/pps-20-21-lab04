@@ -8,7 +8,7 @@ trait Complex {
 }
 
 object Complex {
-  def apply(re:Double, im:Double):Complex = ComplexImpl(re, im)
+  def apply(re: Double, im: Double): Complex = ComplexImpl(re, im)
 
   private case class ComplexImpl(override val re: Double, override val im: Double) extends Complex {
     //(a+ib) + (c+id) = (a+c) + i(b+d)
