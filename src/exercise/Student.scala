@@ -31,7 +31,7 @@ object Student {
 
     override def coursesName:List[String] = courses(_.name) // get course's list with name
 
-    override def hasTeacher(t: Teacher):Boolean = List.contains(courses(_.teacher))( teacher => teacher.name==t.name && teacher.lastname==t.lastname )
+    override def hasTeacher(t: Teacher):Boolean = List.contains(courses(_.teacher))( teacher => teacher == t )
   }
 }
 

@@ -18,7 +18,9 @@ object Lists extends App {
     // Factory List - optional exercise
     def apply[A](args: A*): List[A] = {
       var list:List[A] = List.Nil[A]()
-      args foreach ( i => list = List.append(list, List.Cons[A](i, List.Nil[A]())) )
+      // args.reverse foreach ( list = List.Cons(_,list) )
+      args.reverse foreach ( i => list = List.Cons(i,list) )
+      // args foreach ( i => list = List.append(list, List.Cons[A](i, List.Nil[A]())) )
       list
     }
 
